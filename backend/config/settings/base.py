@@ -31,6 +31,7 @@ INSTALLED_APPS = [
     "drf_spectacular",
     "corsheaders",
     "apps.core",
+    "apps.accounts",
 ]
 
 MIDDLEWARE = [
@@ -44,6 +45,10 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
+
+AUTH_USER_MODEL = "accounts.User"
+# Configurable list of supported countries (ISO alpha-2); not hardcoded in business logic.
+SUPPORTED_COUNTRIES = env_list("SUPPORTED_COUNTRIES", "GH,CM,UG")
 
 ROOT_URLCONF = "config.urls"
 WSGI_APPLICATION = "config.wsgi.application"
@@ -107,7 +112,7 @@ REST_FRAMEWORK = {
         "rest_framework.throttling.AnonRateThrottle",
         "rest_framework.throttling.UserRateThrottle",
     ],
-    "DEFAULT_THROTTLE_RATES": {"anon": "60/min", "user": "240/min"},
+    "DEFAULT_THROTTLE_RATES": {"anon": "60/min", "user": "240/min", "auth": "10/min"},
 }
 
 SPECTACULAR_SETTINGS = {
