@@ -21,3 +21,12 @@ python manage.py runserver
 - Auth: Django session cookies + CSRF (same-domain frontend and API).
 - All DRF endpoints require authentication unless they opt in with `AllowAny`.
 - PostGIS (`django.contrib.gis`) is deferred to Task 2; GDAL availability on Vercel must be verified first.
+
+## Frontend (local)
+```bash
+cd frontend
+npm install
+npm run dev      # http://localhost:5173, proxies /api to Django on :8000
+npm run build    # type-check + production build
+```
+Status: landing page built; other routes are placeholders. The globe uses the public MapLibre demo style for development; replace it with a production basemap before launch.
