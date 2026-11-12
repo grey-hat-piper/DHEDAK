@@ -19,6 +19,8 @@ SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY", "")
 DEBUG = env_bool("DJANGO_DEBUG", False)
 ALLOWED_HOSTS = env_list("DJANGO_ALLOWED_HOSTS")
 FRONTEND_URL = os.environ.get("FRONTEND_URL", "")
+# Clearly-labelled fake facilities may be shown only where this is on (development/preview). Never in production.
+ALLOW_DEMO_DATA = env_bool("ALLOW_DEMO_DATA", False)
 
 INSTALLED_APPS = [
     "django.contrib.admin",
@@ -33,6 +35,8 @@ INSTALLED_APPS = [
     "apps.core",
     "apps.accounts",
     "apps.organisations",
+    "apps.geography",
+    "apps.facilities",
 ]
 
 MIDDLEWARE = [
@@ -119,7 +123,7 @@ REST_FRAMEWORK = {
         "rest_framework.throttling.AnonRateThrottle",
         "rest_framework.throttling.UserRateThrottle",
     ],
-    "DEFAULT_THROTTLE_RATES": {"anon": "60/min", "user": "240/min", "auth": "10/min"},
+    "DEFAULT_THROTTLE_RATES": {"anon": "60/min", "user": "240/min", "auth": "10/min", "public_read": "120/min"},
 }
 
 SPECTACULAR_SETTINGS = {

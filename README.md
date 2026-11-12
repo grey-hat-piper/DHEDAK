@@ -2,7 +2,7 @@
 
 Health Intelligence. Education. Services. Modular monolith: React/TypeScript frontend, Django/DRF backend, Supabase PostgreSQL + PostGIS, Vercel.
 
-Status: Phase 1 in progress (backend skeleton, accounts, organisations, landing page). See `docs/deployment.md` to deploy.
+Status: Phase 1 foundation done; Phase 3 LiveMap in progress (see `docs/livemap.md`). Deploy: `docs/deployment.md`.
 
 ## Backend (local)
 ```bash
