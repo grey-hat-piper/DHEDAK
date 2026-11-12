@@ -33,21 +33,5 @@ export function initEffects({ reduced }) {
     items.forEach((el) => io.observe(el));
   }
 
-  // pathway line draws as it enters view
-  const path = document.querySelector("[data-path]");
-  if (path) {
-    if (reduced) path.classList.add("drawn");
-    else new IntersectionObserver(([e], o) => { if (e.isIntersecting) { path.classList.add("drawn"); o.disconnect(); } }, { threshold: 0.3 }).observe(path);
-  }
-
-  // cursor spotlight on cards
-  document.querySelectorAll("[data-spot]").forEach((card) => {
-    card.addEventListener("pointermove", (e) => {
-      const r = card.getBoundingClientRect();
-      card.style.setProperty("--mx", `${e.clientX - r.left}px`);
-      card.style.setProperty("--my", `${e.clientY - r.top}px`);
-    });
-  });
-
   document.querySelector("[data-year]").textContent = new Date().getFullYear();
 }

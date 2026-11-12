@@ -10,6 +10,7 @@
 </head>
 <body>
   <a class="skip" href="#main">Skip to content</a>
+  <canvas id="helix" class="helix-bg" aria-hidden="true"></canvas>
 
   <header class="nav" data-nav>
     <div class="wrap nav-inner">
@@ -31,8 +32,7 @@
   </header>
 
   <main id="main">
-    <section class="hero" aria-labelledby="hero-title">
-      <canvas id="helix" class="helix" aria-hidden="true"></canvas>
+    <section class="hero" data-section="hero" aria-labelledby="hero-title">
       <div class="hero-glow" aria-hidden="true"></div>
       <div class="wrap hero-inner">
         <p class="eyebrow rise" style="--d:0">Health Intelligence · Education · Services</p>
@@ -47,7 +47,7 @@
       <a class="scroll-cue" href="#intelligence" aria-label="Scroll to health intelligence"><span></span></a>
     </section>
 
-    <section id="intelligence" class="section" data-globe-section aria-labelledby="intel-title">
+    <section id="intelligence" class="section" data-section="intel" data-globe-section aria-labelledby="intel-title">
       <div class="wrap">
         <div class="section-head reveal">
           <p class="eyebrow">Health intelligence</p>
@@ -76,61 +76,133 @@
       </div>
     </section>
 
-    <section id="services" class="section" aria-labelledby="svc-title">
+    <section id="services" class="section services" data-section="services" aria-labelledby="svc-title">
       <div class="wrap">
         <div class="section-head reveal">
           <p class="eyebrow">Our services</p>
           <h2 id="svc-title">Four connected pillars.</h2>
-          <p class="muted">Two are in development for the first release. Two are planned.</p>
+          <p class="muted">Two are in development for the first release. Two are planned. Explore each concept below: move your cursor over the canvases and try the controls.</p>
         </div>
-        <div class="cards">
-          <a class="card reveal" href="/app/livemap" data-spot>
-            <span class="tag tag-on">Active</span>
-            <svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="17" /><path d="M7 24h34M24 7c-9 9-9 25 0 34M24 7c9 9 9 25 0 34" /></svg>
-            <h3>DHEDAK LiveMap</h3>
-            <p>Healthcare facility discovery and geographical health intelligence.</p>
-          </a>
-          <a class="card reveal" href="/app/management" data-spot>
-            <span class="tag tag-on">Active</span>
-            <svg viewBox="0 0 48 48" aria-hidden="true"><path d="M8 38V20M20 38V10M32 38V26M44 38H4" /><circle cx="8" cy="14" r="3" /><circle cx="32" cy="20" r="3" /></svg>
-            <h3>DHEDAK Management</h3>
-            <p>Health data intelligence, programme monitoring and reporting.</p>
-          </a>
-          <div class="card card-off reveal" aria-disabled="true">
-            <span class="tag">Coming soon</span>
-            <svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="12" cy="24" r="6" /><circle cx="36" cy="12" r="6" /><circle cx="36" cy="36" r="6" /><path d="M17 21l13-7M17 27l13 7" /></svg>
-            <h3>DHEDAK MedConnect</h3>
-            <p>Healthcare provider and medical supplier connections.</p>
-          </div>
-          <div class="card card-off reveal" aria-disabled="true">
-            <span class="tag">Coming soon</span>
-            <svg viewBox="0 0 48 48" aria-hidden="true"><path d="M6 14l18-8 18 8-18 8z" /><path d="M14 19v11c0 3 5 6 10 6s10-3 10-6V19" /></svg>
-            <h3>DHEDAK Education</h3>
-            <p>Health education, awareness campaigns and community engagement.</p>
-          </div>
+
+        <div class="pillars">
+          <article class="pillar" data-pillar="livemap" style="--accent:#38bdf8;--i:0">
+            <div class="pillar-copy">
+              <p class="pillar-index">01 <span>/ 04</span></p>
+              <span class="tag tag-on">Active</span>
+              <h3>DHEDAK LiveMap</h3>
+              <p class="pillar-lead">Find verified healthcare services on a map, and see the health intelligence behind the places.</p>
+              <ul class="caps">
+                <li>Search and filter facilities by category, country, region and district</li>
+                <li>Intelligence layers always show their source, reference year and limitations</li>
+                <li>Only approved, public-safe information is ever displayed</li>
+              </ul>
+              <a class="btn btn-ghost" href="/app/livemap">Open LiveMap</a>
+            </div>
+            <div class="pillar-stage">
+              <div class="stage-canvas"><canvas aria-label="Interactive illustration of a facility map with category filters and clustering. Illustrative points only." role="img"></canvas></div>
+              <div class="stage-ui" role="group" aria-label="Map controls">
+                <button class="chip" type="button" data-cat="hospital" aria-pressed="true"><i style="--c:#38bdf8"></i>Hospitals</button>
+                <button class="chip" type="button" data-cat="clinic" aria-pressed="true"><i style="--c:#2dd4bf"></i>Clinics</button>
+                <button class="chip" type="button" data-cat="pharmacy" aria-pressed="true"><i style="--c:#c4b5fd"></i>Pharmacies</button>
+                <button class="chip" type="button" data-cat="lab" aria-pressed="true"><i style="--c:#fbbf24"></i>Laboratories</button>
+                <span class="chip-sep" aria-hidden="true"></span>
+                <button class="chip" type="button" data-zoom="expand" aria-pressed="true">Expand</button>
+                <button class="chip" type="button" data-zoom="cluster" aria-pressed="false">Cluster</button>
+              </div>
+              <p class="stage-note" data-status role="status">Illustrative points. Not real facilities.</p>
+            </div>
+          </article>
+
+          <article class="pillar" data-pillar="management" style="--accent:#2dd4bf;--i:1">
+            <div class="pillar-copy">
+              <p class="pillar-index">02 <span>/ 04</span></p>
+              <span class="tag tag-on">Active</span>
+              <h3>DHEDAK Management</h3>
+              <p class="pillar-lead">Turn raw spreadsheets into reviewed, trustworthy data, and keep health programmes on track.</p>
+              <ul class="caps">
+                <li>CSV and Excel imports with validation, duplicate checks and downloadable error reports</li>
+                <li>Nothing is used until an authorised reviewer approves it, and publication is a separate permission</li>
+                <li>Programme activities, targets and reports, in a private workspace for every organisation</li>
+              </ul>
+              <a class="btn btn-ghost" href="/app/management">Open Management</a>
+            </div>
+            <div class="pillar-stage">
+              <div class="stage-canvas"><canvas aria-label="Simulated data pipeline: records are uploaded, validated, reviewed, approved and optionally published." role="img"></canvas></div>
+              <div class="stage-ui" role="group" aria-label="Pipeline controls">
+                <button class="chip chip-solid" type="button" data-act="run">Run an import</button>
+                <button class="chip chip-solid" type="button" data-act="approve" disabled>Approve batch</button>
+                <button class="chip chip-switch" type="button" role="switch" aria-checked="false" data-act="publish"><span class="knob" aria-hidden="true"></span>Allow public publication</button>
+              </div>
+              <p class="stage-note" data-status role="status">Simulated records for illustration. No real data.</p>
+            </div>
+          </article>
+
+          <article class="pillar is-soon" data-pillar="medconnect" style="--accent:#a78bfa;--i:2" aria-label="DHEDAK MedConnect, coming soon">
+            <div class="pillar-copy">
+              <p class="pillar-index">03 <span>/ 04</span></p>
+              <span class="tag">Coming soon</span>
+              <h3>DHEDAK MedConnect</h3>
+              <p class="pillar-lead">Connecting healthcare providers with the medical suppliers they need.</p>
+              <p class="caps-label">Planned</p>
+              <ul class="caps">
+                <li>Provider and supplier directories</li>
+                <li>Verified supplier profiles</li>
+                <li>Connections between providers and suppliers</li>
+              </ul>
+              <p class="soon-note">Not available yet.</p>
+            </div>
+            <div class="pillar-stage">
+              <div class="stage-canvas"><canvas aria-label="Concept preview of providers and suppliers connecting. Not yet available." role="img"></canvas><span class="soon-badge">Coming soon</span></div>
+              <p class="stage-note">Concept preview. No accounts, procurement or transactions exist yet.</p>
+            </div>
+          </article>
+
+          <article class="pillar is-soon" data-pillar="education" style="--accent:#fbbf24;--i:3" aria-label="DHEDAK Education, coming soon">
+            <div class="pillar-copy">
+              <p class="pillar-index">04 <span>/ 04</span></p>
+              <span class="tag">Coming soon</span>
+              <h3>DHEDAK Education</h3>
+              <p class="pillar-lead">Health education and awareness that reaches communities.</p>
+              <p class="caps-label">Planned</p>
+              <ul class="caps">
+                <li>Health education articles and learning materials</li>
+                <li>Digital awareness campaigns</li>
+                <li>Community programmes and campaign analytics</li>
+              </ul>
+              <p class="soon-note">Not available yet.</p>
+            </div>
+            <div class="pillar-stage">
+              <div class="stage-canvas"><canvas aria-label="Concept preview of awareness spreading through a community. Not yet available." role="img"></canvas><span class="soon-badge">Coming soon</span></div>
+              <p class="stage-note">Concept preview. No courses or campaigns exist yet.</p>
+            </div>
+          </article>
         </div>
       </div>
     </section>
 
-    <section id="about" class="section" aria-labelledby="about-title">
-      <div class="wrap">
-        <div class="section-head reveal">
-          <p class="eyebrow">About DHEDAK</p>
-          <h2 id="about-title">From information to impact.</h2>
-          <p class="muted">Health information creates impact when people can understand it, find the right service and access support. DHEDAK aims to close that gap, with an architecture ready for more African countries.</p>
+    <section id="about" class="about" data-section="about" aria-labelledby="about-title">
+      <div class="about-track" data-about-track>
+        <div class="about-sticky">
+          <canvas class="about-helix" data-about-helix aria-hidden="true"></canvas>
+          <div class="wrap about-grid">
+            <div class="about-copy">
+              <p class="eyebrow">About DHEDAK</p>
+              <h2 id="about-title">From information to impact.</h2>
+              <p class="muted">Health information creates impact when people can understand it, find the right service and access support. DHEDAK aims to close that gap across Ghana, Cameroon and Uganda, with an architecture ready for more African countries.</p>
+            </div>
+            <ol class="stages">
+              <li data-stage-item class="is-active"><span>01</span><div><h3>Educate</h3><p>Make reliable health information easier to understand.</p></div></li>
+              <li data-stage-item><span>02</span><div><h3>Connect</h3><p>Help people find verified healthcare services.</p></div></li>
+              <li data-stage-item><span>03</span><div><h3>Resource</h3><p>Strengthen links between providers and suppliers.</p></div></li>
+              <li data-stage-item><span>04</span><div><h3>Track &amp; improve</h3><p>Organise data, monitor programmes and learn from results.</p></div></li>
+            </ol>
+          </div>
         </div>
-        <ol class="path" data-path>
-          <svg class="path-line" aria-hidden="true" preserveAspectRatio="none" viewBox="0 0 100 2"><line x1="0" y1="1" x2="100" y2="1" /></svg>
-          <li class="reveal"><span>01</span><h3>Educate</h3><p>Make reliable health information easier to understand.</p></li>
-          <li class="reveal"><span>02</span><h3>Connect</h3><p>Help people find verified healthcare services.</p></li>
-          <li class="reveal"><span>03</span><h3>Resource</h3><p>Strengthen links between providers and suppliers.</p></li>
-          <li class="reveal"><span>04</span><h3>Track &amp; improve</h3><p>Organise data, monitor programmes and learn from results.</p></li>
-        </ol>
       </div>
     </section>
   </main>
 
-  <footer id="contact" class="footer">
+  <footer id="contact" class="footer" data-section="footer">
     <div class="wrap foot-grid">
       <div>
         <a class="brand" href="/"><span>DHEDAK</span></a>
