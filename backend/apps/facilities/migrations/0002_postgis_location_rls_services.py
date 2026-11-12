@@ -17,14 +17,28 @@ def seed_services(apps, schema_editor):
         FacilityService.objects.update_or_create(slug=slug, defaults={"name": name, "is_sensitive": sensitive})
 
 
+def _postgis_schema(schema_editor):
+    """Make sure PostGIS exists and return the schema it lives in (Supabase uses `extensions`; a plain
+    local Postgres uses `public`). Objects are schema-qualified below, so this never depends on search_path."""
+    with schema_editor.connection.cursor() as cursor:
+        cursor.execute("SELECT 1 FROM pg_namespace WHERE nspname = 'extensions'")
+        target = "extensions" if cursor.fetchone() else "public"
+        cursor.execute(f'CREATE EXTENSION IF NOT EXISTS postgis WITH SCHEMA "{target}"')
+        cursor.execute(
+            "SELECT n.nspname FROM pg_extension e JOIN pg_namespace n ON n.oid = e.extnamespace WHERE e.extname = 'postgis'"
+        )
+        return cursor.fetchone()[0]
+
+
 def add_location(apps, schema_editor):
     """PostGIS only. `location` is generated from latitude/longitude, so it cannot drift from them,
     and Django (which never writes it) needs no GDAL/GeoDjango. Use it in raw SQL for ST_DWithin etc."""
     if schema_editor.connection.vendor != "postgresql":
         return
+    g = f'"{_postgis_schema(schema_editor)}"'
     schema_editor.execute(
-        "ALTER TABLE facilities_facility ADD COLUMN location geography(Point, 4326) GENERATED ALWAYS AS "
-        "(ST_SetSRID(ST_MakePoint(longitude, latitude), 4326)::geography) STORED"
+        f"ALTER TABLE facilities_facility ADD COLUMN location {g}.geography(Point, 4326) GENERATED ALWAYS AS "
+        f"({g}.ST_SetSRID({g}.ST_MakePoint(longitude, latitude), 4326)::{g}.geography) STORED"
     )
     schema_editor.execute("CREATE INDEX facilities_facility_location_gix ON facilities_facility USING GIST (location)")
 

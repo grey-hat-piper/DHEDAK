@@ -1,4 +1,5 @@
 import os
+import sys
 from pathlib import Path
 
 import dj_database_url
@@ -74,9 +75,12 @@ TEMPLATES = [
 ]
 
 # SQLite fallback is for local development only; prod settings require DATABASE_URL.
+# `manage.py test` must never create a test database on the real (Supabase) server, so it ignores
+# DATABASE_URL and uses SQLite. To test against Postgres/PostGIS, set TEST_DATABASE_URL to a LOCAL server.
+RUNNING_TESTS = len(sys.argv) > 1 and sys.argv[1] == "test"
 DATABASES = {
     "default": dj_database_url.config(
-        env="DATABASE_URL",
+        env="TEST_DATABASE_URL" if RUNNING_TESTS else "DATABASE_URL",
         default=f"sqlite:///{BASE_DIR / 'db.sqlite3'}",
         conn_max_age=0,  # serverless-friendly; the Supabase pooler manages connections
     )
