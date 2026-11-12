@@ -1,8 +1,17 @@
+import os
+
 from django.core.exceptions import ImproperlyConfigured
 
 from .base import *  # noqa: F401,F403
 
 DEBUG = False
+
+# Vercel injects these per deployment; trusting them lets preview deployments serve the API.
+for _var in ("VERCEL_URL", "VERCEL_BRANCH_URL", "VERCEL_PROJECT_PRODUCTION_URL"):
+    _host = os.environ.get(_var, "").strip()
+    if _host:
+        ALLOWED_HOSTS.append(_host)  # noqa: F405
+        CSRF_TRUSTED_ORIGINS.append(f"https://{_host}")  # noqa: F405
 
 if not SECRET_KEY:  # noqa: F405
     raise ImproperlyConfigured("DJANGO_SECRET_KEY must be set in production.")

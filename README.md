@@ -2,7 +2,7 @@
 
 Health Intelligence. Education. Services. Modular monolith: React/TypeScript frontend, Django/DRF backend, Supabase PostgreSQL + PostGIS, Vercel.
 
-Status: Phase 1, Task 1 (backend skeleton). MedConnect and Education are COMING SOON and not implemented.
+Status: Phase 1 in progress (backend skeleton, accounts, organisations, landing page). See `docs/deployment.md` to deploy.
 
 ## Backend (local)
 ```bash

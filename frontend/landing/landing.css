@@ -78,7 +78,8 @@ ul, ol { list-style: none; margin: 0; padding: 0; }
 /* globe */
 .intel { display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr); gap: 28px; align-items: start; }
 .globe-wrap { position: relative; aspect-ratio: 1 / 1; max-height: 680px; width: 100%; border-radius: var(--radius); border: 1px solid var(--line); overflow: hidden; background: radial-gradient(circle at 50% 50%, #0b1b38 0%, var(--bg) 72%); }
-.globe { position: absolute; inset: 0; cursor: grab; }
+/* two-class selector: maplibre-gl.css loads later and sets .maplibregl-map { position: relative }, which would collapse this to 0px tall */
+.globe-wrap .globe { position: absolute; inset: 0; width: 100%; height: 100%; cursor: grab; }
 .globe:active { cursor: grabbing; }
 .globe-status { position: absolute; inset: auto 0 14px 0; text-align: center; font-size: 0.85rem; color: var(--muted); pointer-events: none; }
 .globe-status[hidden] { display: none; }

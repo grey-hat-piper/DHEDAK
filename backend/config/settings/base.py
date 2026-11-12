@@ -78,6 +78,12 @@ DATABASES = {
     )
 }
 
+# Supabase's transaction pooler (port 6543) does not support server-side cursors or prepared statements.
+_db = DATABASES["default"]
+if "postgresql" in _db["ENGINE"]:
+    _db["DISABLE_SERVER_SIDE_CURSORS"] = True
+    _db.setdefault("OPTIONS", {}).update({"prepare_threshold": None, "sslmode": "require"})
+
 AUTH_PASSWORD_VALIDATORS = [
     {"NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator"},
     {"NAME": "django.contrib.auth.password_validation.MinimumLengthValidator", "OPTIONS": {"min_length": 10}},
@@ -90,7 +96,7 @@ TIME_ZONE = "UTC"
 USE_I18N = True
 USE_TZ = True
 
-STATIC_URL = "static/"
+STATIC_URL = "/static/"
 STATIC_ROOT = BASE_DIR / "staticfiles"
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
