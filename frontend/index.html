@@ -1,14 +1,160 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="DHEDAK: health intelligence, education and services for Ghana, Cameroon and Uganda." />
-    <title>DHEDAK | Health Intelligence. Education. Services.</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#060d1b" />
+  <meta name="description" content="DHEDAK: health intelligence, education and services connecting people to better healthcare across Ghana, Cameroon and Uganda." />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <title>DHEDAK | Health Intelligence. Education. Services.</title>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <header class="nav" data-nav>
+    <div class="wrap nav-inner">
+      <a class="brand" href="/" aria-label="DHEDAK home">
+        <svg width="28" height="28" viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="14" fill="#0b1f3a"/><path d="M20 12c0 14 24 14 24 28s-24 14-24 14" fill="none" stroke="#38BDF8" stroke-width="4" stroke-linecap="round"/><path d="M44 12c0 14-24 14-24 28s24 14 24 14" fill="none" stroke="#2DD4BF" stroke-width="4" stroke-linecap="round"/><circle cx="32" cy="32" r="4" fill="#fff"/></svg>
+        <span>DHEDAK</span>
+      </a>
+      <nav id="menu" class="menu" aria-label="Main">
+        <a href="#about">About DHEDAK</a>
+        <a href="#services">Our Services</a>
+        <a href="/app/livemap">LiveMap</a>
+        <a href="/app/management">Management</a>
+        <a href="#contact">Contact</a>
+        <a href="/app/signin">Sign In</a>
+        <a class="btn btn-solid" href="/app/register">Get Started</a>
+      </nav>
+      <button class="menu-btn" type="button" aria-expanded="false" aria-controls="menu" data-menu-btn>Menu</button>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero" aria-labelledby="hero-title">
+      <canvas id="helix" class="helix" aria-hidden="true"></canvas>
+      <div class="hero-glow" aria-hidden="true"></div>
+      <div class="wrap hero-inner">
+        <p class="eyebrow rise" style="--d:0">Health Intelligence · Education · Services</p>
+        <h1 id="hero-title" class="rise" style="--d:1">Connecting <em>health intelligence</em> to better healthcare access.</h1>
+        <p class="lede rise" style="--d:2">Discover healthcare services, explore health intelligence and strengthen health programmes through one connected platform.</p>
+        <p class="sub rise" style="--d:3">DHEDAK improves access to reliable healthcare information across Africa, starting with Ghana, Cameroon and Uganda.</p>
+        <div class="cta rise" style="--d:4">
+          <a class="btn btn-solid" href="/app/livemap">Explore LiveMap</a>
+          <a class="btn btn-ghost" href="/app/register">Get Started</a>
+        </div>
+      </div>
+      <a class="scroll-cue" href="#intelligence" aria-label="Scroll to health intelligence"><span></span></a>
+    </section>
+
+    <section id="intelligence" class="section" data-globe-section aria-labelledby="intel-title">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <p class="eyebrow">Health intelligence</p>
+          <h2 id="intel-title">Explore the evidence, country by country.</h2>
+          <p class="muted">Drag the globe. Change what the circles measure. Select a country for its figures, with the source and limitations alongside.</p>
+        </div>
+
+        <div class="intel reveal">
+          <div class="globe-wrap">
+            <div class="globe" data-globe role="application" aria-label="Interactive globe. Drag to rotate; use the country buttons for a keyboard alternative."></div>
+            <p class="globe-status" data-globe-status role="status">Loading globe…</p>
+            <button class="btn btn-ghost reset" type="button" data-reset hidden>Reset view</button>
+          </div>
+
+          <div class="controls">
+            <fieldset class="seg">
+              <legend>Circle size shows</legend>
+              <label><input type="radio" name="metric" value="adults" checked /><span>Adults</span></label>
+              <label><input type="radio" name="metric" value="prevalence" /><span>Prevalence</span></label>
+              <label><input type="radio" name="metric" value="undiagnosed" /><span>Undiagnosed</span></label>
+            </fieldset>
+            <div class="picker" data-countries role="group" aria-label="Choose a country"></div>
+            <aside class="panel" data-panel aria-live="polite"></aside>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="services" class="section" aria-labelledby="svc-title">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <p class="eyebrow">Our services</p>
+          <h2 id="svc-title">Four connected pillars.</h2>
+          <p class="muted">Two are in development for the first release. Two are planned.</p>
+        </div>
+        <div class="cards">
+          <a class="card reveal" href="/app/livemap" data-spot>
+            <span class="tag tag-on">Active</span>
+            <svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="17" /><path d="M7 24h34M24 7c-9 9-9 25 0 34M24 7c9 9 9 25 0 34" /></svg>
+            <h3>DHEDAK LiveMap</h3>
+            <p>Healthcare facility discovery and geographical health intelligence.</p>
+          </a>
+          <a class="card reveal" href="/app/management" data-spot>
+            <span class="tag tag-on">Active</span>
+            <svg viewBox="0 0 48 48" aria-hidden="true"><path d="M8 38V20M20 38V10M32 38V26M44 38H4" /><circle cx="8" cy="14" r="3" /><circle cx="32" cy="20" r="3" /></svg>
+            <h3>DHEDAK Management</h3>
+            <p>Health data intelligence, programme monitoring and reporting.</p>
+          </a>
+          <div class="card card-off reveal" aria-disabled="true">
+            <span class="tag">Coming soon</span>
+            <svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="12" cy="24" r="6" /><circle cx="36" cy="12" r="6" /><circle cx="36" cy="36" r="6" /><path d="M17 21l13-7M17 27l13 7" /></svg>
+            <h3>DHEDAK MedConnect</h3>
+            <p>Healthcare provider and medical supplier connections.</p>
+          </div>
+          <div class="card card-off reveal" aria-disabled="true">
+            <span class="tag">Coming soon</span>
+            <svg viewBox="0 0 48 48" aria-hidden="true"><path d="M6 14l18-8 18 8-18 8z" /><path d="M14 19v11c0 3 5 6 10 6s10-3 10-6V19" /></svg>
+            <h3>DHEDAK Education</h3>
+            <p>Health education, awareness campaigns and community engagement.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="about" class="section" aria-labelledby="about-title">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <p class="eyebrow">About DHEDAK</p>
+          <h2 id="about-title">From information to impact.</h2>
+          <p class="muted">Health information creates impact when people can understand it, find the right service and access support. DHEDAK aims to close that gap, with an architecture ready for more African countries.</p>
+        </div>
+        <ol class="path" data-path>
+          <svg class="path-line" aria-hidden="true" preserveAspectRatio="none" viewBox="0 0 100 2"><line x1="0" y1="1" x2="100" y2="1" /></svg>
+          <li class="reveal"><span>01</span><h3>Educate</h3><p>Make reliable health information easier to understand.</p></li>
+          <li class="reveal"><span>02</span><h3>Connect</h3><p>Help people find verified healthcare services.</p></li>
+          <li class="reveal"><span>03</span><h3>Resource</h3><p>Strengthen links between providers and suppliers.</p></li>
+          <li class="reveal"><span>04</span><h3>Track &amp; improve</h3><p>Organise data, monitor programmes and learn from results.</p></li>
+        </ol>
+      </div>
+    </section>
+  </main>
+
+  <footer id="contact" class="footer">
+    <div class="wrap foot-grid">
+      <div>
+        <a class="brand" href="/"><span>DHEDAK</span></a>
+        <p class="muted">Health Intelligence. Education. Services. Initial country focus: Ghana, Cameroon and Uganda.</p>
+      </div>
+      <div>
+        <h2>Platform</h2>
+        <ul>
+          <li><a href="#about">About DHEDAK</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="/app/methodology">Data and methodology</a></li>
+          <li><a href="/app/privacy">Privacy policy</a></li>
+          <li><a href="/app/terms">Terms of service</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>Contact</h2>
+        <p class="muted">Contact details will be published here once supplied.</p>
+      </div>
+    </div>
+    <p class="legal">© <span data-year></span> DHEDAK</p>
+  </footer>
+
+  <noscript><p class="noscript">DHEDAK's interactive experience needs JavaScript. Core information remains available on this page.</p></noscript>
+  <script type="module" src="/landing/main.js"></script>
+</body>
 </html>
