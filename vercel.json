@@ -4,17 +4,47 @@
     "frontend": {
       "root": "frontend/",
       "framework": "vite",
-      "rewrites": [{ "source": "/app/(.*)", "destination": "/app/index.html" }]
+      "rewrites": [
+        {
+          "source": "/app/(.*)",
+          "destination": "/app/index.html"
+        }
+      ]
     },
     "backend": {
       "root": "backend/",
-      "functions": { "config/wsgi.py": { "maxDuration": 30 } }
+      "entrypoint": "config.wsgi:application",
+      "functions": {
+        "config/wsgi.py": {
+          "maxDuration": 30
+        }
+      }
     }
   },
   "rewrites": [
-    { "source": "/api/(.*)", "destination": { "service": "backend" } },
-    { "source": "/admin/(.*)", "destination": { "service": "backend" } },
-    { "source": "/static/(.*)", "destination": { "service": "backend" } },
-    { "source": "/(.*)", "destination": { "service": "frontend" } }
+    {
+      "source": "/api/(.*)",
+      "destination": {
+        "service": "backend"
+      }
+    },
+    {
+      "source": "/admin/(.*)",
+      "destination": {
+        "service": "backend"
+      }
+    },
+    {
+      "source": "/static/(.*)",
+      "destination": {
+        "service": "backend"
+      }
+    },
+    {
+      "source": "/(.*)",
+      "destination": {
+        "service": "frontend"
+      }
+    }
   ]
 }

@@ -7,7 +7,7 @@ One Vercel project, two services, one domain (`vercel.json`):
 | `/api/*`, `/admin/*`, `/static/*` | `backend` (Django, WSGI, Vercel Python runtime) |
 | everything else | `frontend` (Vite build; `/` landing, `/app/*` React app) |
 
-Vercel detects Django from `backend/manage.py` and reads `WSGI_APPLICATION` (`config.wsgi.application`).
+Vercel detects Django from `backend/manage.py`, but in Services mode the entrypoint must be declared explicitly (`config.wsgi:application`).
 `collectstatic` runs automatically because `STATIC_ROOT` is set. Vercel Services is in **beta** (all plans).
 
 ## One-time setup
