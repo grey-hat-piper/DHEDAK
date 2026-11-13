@@ -20,7 +20,7 @@ const colorExpr: maplibregl.ExpressionSpecification = [
   "match", ["get", "facility_type"],
   ...Object.entries(TYPE_COLORS).flat(),
   FALLBACK_COLOR,
-] as maplibregl.ExpressionSpecification;
+] as unknown as maplibregl.ExpressionSpecification;
 
 const reducedMotion = () => window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 const EMPTY = { type: "FeatureCollection", features: [] } as const;
@@ -69,7 +69,7 @@ export default function LiveMapCanvas({ data, selectedId, onSelect, onViewport, 
       const src = map.getSource(SRC) as GeoJSONSource;
       try {
         const zoom = await src.getClusterExpansionZoom(f.properties.cluster_id as number);
-        map.easeTo({ center: (f.geometry as GeoJSON.Point).coordinates as [number, number], zoom, duration: reducedMotion() ? 0 : 500 });
+        map.easeTo({ center: (f.geometry as unknown as { coordinates: [number, number] }).coordinates, zoom, duration: reducedMotion() ? 0 : 500 });
       } catch { /* cluster vanished mid-click; ignore */ }
     });
     map.on("click", "points", (e) => {
