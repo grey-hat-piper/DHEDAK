@@ -37,3 +37,15 @@ python manage.py runserver   # then http://localhost:8000/api/v1/facilities/
 - L2: LiveMap page (React + MapLibre, map/list views, search, filters, details panel).
 - L3: facility submission and review workflow.
 - L4: health intelligence mode.
+
+
+## L2 - LiveMap page (frontend)
+
+Route `/app/livemap` (lazy-loaded). Code in `frontend/src/modules/livemap/`.
+
+- Filters, search and the selected facility are stored in the URL (`q`, `country`, `region`, `district`, `type`, `service`, `f`), so views can be shared.
+- Map: MapLibre with clustered GeoJSON from `/facilities/geojson/`. Viewport (bbox) refetching starts only when the API reports `truncated: true`.
+- List: paginated "Load more", independent of the viewport. Mobile has a Map/List toggle and a bottom-sheet details panel.
+- States handled: loading, empty, error with retry, 403, 404 on details, basemap failure.
+- Basemap: development uses MapLibre demo tiles. Set `VITE_BASEMAP_STYLE_URL` to a production style before launch.
+- Not yet verified in a browser; run `npm run dev` and `npm run build` locally.
