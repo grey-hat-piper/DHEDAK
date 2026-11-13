@@ -1,4 +1,5 @@
 {
     "scm.alwaysShowRepositories": true,
-    "scm.autoReveal": false
+    "scm.autoReveal": false,
+    "python.terminal.useEnvFile": true
 }
