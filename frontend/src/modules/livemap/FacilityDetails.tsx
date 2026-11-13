@@ -21,11 +21,11 @@ export default function FacilityDetails({ id, onClose }: { id: number; onClose: 
   const demo = f?.data_source.startsWith("DEMO");
   return (
     <section aria-label="Facility details" className="flex h-full flex-col">
-      <div className="flex items-start justify-between gap-3 border-b border-white/10 p-4">
+      <div className="flex items-start justify-between gap-3 border-b border-white/10 p-3 md:p-4">
         <h2 className="text-lg font-medium leading-snug text-slate-50">{f?.name ?? (loading ? "Loading…" : "Facility")}</h2>
-        <button type="button" onClick={onClose} aria-label="Close details" className="rounded-full border border-white/20 px-3 py-1 text-sm hover:bg-white/10">✕</button>
+        <button type="button" onClick={onClose} aria-label="Close details" className="min-h-9 min-w-9 rounded-full border border-white/20 px-3 text-sm hover:bg-white/10">✕</button>
       </div>
-      <div className="flex-1 space-y-4 overflow-y-auto p-4 text-sm text-slate-300">
+      <div className="flex-1 space-y-3 overflow-y-auto p-3 text-sm md:space-y-4 md:p-4 text-slate-300">
         {error && (
           <p role="alert" className="rounded-lg border border-rose-400/30 bg-rose-950/30 p-3 text-rose-100">
             {error instanceof ApiError && error.status === 404 ? "This facility is not available." : error.message}
