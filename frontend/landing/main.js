@@ -3,6 +3,7 @@ import "./landing.css";
 import { initEffects } from "./effects.js";
 import { createHelix } from "./helix.js";
 import { initScroll } from "./scroll.js";
+import { initAbout } from "./about.js";
 import { initPillars } from "./pillars.js";
 
 const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -19,7 +20,8 @@ if (aboutHelix) {
   Object.assign(aboutHelix.target, { cx: 0.5, cy: 0.5, tilt: 0, len: 0.92, r: 0.16, alpha: 1, lit: 0 });
   aboutHelix.snap();
 }
-safe("scroll", () => initScroll({ helix, aboutHelix, reduced }));
+const about = safe("about", () => initAbout({ track: document.querySelector("[data-about-track]"), reduced }));
+safe("scroll", () => initScroll({ helix, aboutHelix, about, reduced }));
 safe("pillars", () => initPillars({ reduced }));
 
 // The globe (MapLibre) is loaded only when its section approaches the viewport.

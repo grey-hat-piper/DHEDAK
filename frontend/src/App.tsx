@@ -1,5 +1,6 @@
 import { lazy, Suspense } from "react";
 import { Route, Routes } from "react-router-dom";
+import HelixLoader from "./components/loader/HelixLoader";
 import { AuthProvider } from "./auth/AuthContext";
 import RequireAuth from "./auth/RequireAuth";
 import SiteLayout from "./layouts/SiteLayout";
@@ -18,7 +19,7 @@ export default function App() {
   return (
     <AuthProvider>
       <Routes>
-        <Route path="livemap" element={<Suspense fallback={<p role="status" className="p-8 text-slate-400">Loading LiveMap…</p>}><LiveMapPage /></Suspense>} />
+        <Route path="livemap" element={<Suspense fallback={<div className="flex h-dvh items-center bg-slate-950"><HelixLoader label="Loading LiveMap" /></div>}><LiveMapPage /></Suspense>} />
         <Route element={<SiteLayout />}>
           <Route path="signin" element={<SignInPage />} />
           <Route path="register" element={<RegisterPage />} />

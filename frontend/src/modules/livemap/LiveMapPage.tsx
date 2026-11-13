@@ -1,5 +1,7 @@
 import { useCallback, useMemo, useState } from "react";
 import { useSearchParams } from "react-router-dom";
+import HelixLoader from "../../components/loader/HelixLoader";
+import ServicesMenu from "../../components/ServicesMenu";
 import FacilityDetails from "./FacilityDetails";
 import FacilityList from "./FacilityList";
 import FilterPanel from "./FilterPanel";
@@ -42,6 +44,7 @@ export default function LiveMapPage() {
       <header className="flex items-center justify-between gap-2 border-b border-white/10 px-3 py-2 md:px-4 md:py-2.5">
         <div className="flex min-w-0 items-center gap-3 md:gap-4">
           <a href="/" className="text-sm font-semibold tracking-wide">DHEDAK</a>
+          <div className="hidden md:block"><ServicesMenu /></div>
           <nav aria-label="LiveMap modes" className="flex gap-1 text-sm">
             <span className="rounded-full bg-cyan-400/15 px-3 py-1 text-cyan-100" aria-current="page">Facilities</span>
             <span className="hidden rounded-full px-3 py-1 text-slate-500 md:inline" aria-disabled="true" title="Coming next">Health intelligence · soon</span>
@@ -76,6 +79,7 @@ export default function LiveMapPage() {
             <span>Search and filter</span>
             <span className="text-slate-400">{activeFilterCount(filters) ? `${activeFilterCount(filters)} active · ` : ""}{list.count.toLocaleString()} found</span>
           </button>
+          {geo.loading && !geo.data && !geo.error && <HelixLoader variant="overlay" label="Loading facilities" />}
           {mapError && <p role="alert" className="absolute left-3 right-3 top-16 max-w-sm rounded-lg bg-rose-950/90 md:top-3 md:right-auto p-3 text-sm text-rose-100">Basemap problem: {mapError}</p>}
           {geo.error && !forbidden && <p role="alert" className="absolute left-3 right-3 top-16 rounded-lg bg-rose-950/90 p-3 text-sm text-rose-100 md:top-3 md:right-auto">{geo.error.message} <button className="underline" onClick={geo.reload}>Retry</button></p>}
           {geo.data && geo.data.features.length === 0 && !geo.loading && (

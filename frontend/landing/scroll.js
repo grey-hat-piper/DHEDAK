@@ -1,5 +1,6 @@
 // Scroll choreography: (1) the page-long background helix glides between per-section poses,
 // (2) the About section pins and "sequences" a second helix, lighting its four stages in order.
+import { stageFromProgress } from "./about.js";
 import { clamp, lerp, smooth } from "./kit.js";
 
 const POSES = {
@@ -20,7 +21,7 @@ const POSES = {
 };
 const ORDER = ["hero", "intel", "services", "about", "footer"];
 
-export function initScroll({ helix, aboutHelix, reduced }) {
+export function initScroll({ helix, aboutHelix, about, reduced }) {
   const sections = ORDER.map((id) => document.querySelector(`[data-section="${id}"]`));
   const track = document.querySelector("[data-about-track]");
   const stageItems = [...document.querySelectorAll("[data-stage-item]")];
@@ -58,11 +59,8 @@ export function initScroll({ helix, aboutHelix, reduced }) {
     aboutHelix.target.spin = 0.7 + p * 1.6;
     aboutHelix.target.r = 0.16 + p * 0.03;
     track.style.setProperty("--p", p.toFixed(3));
-    const active = p < 0.25 ? 0 : p < 0.5 ? 1 : p < 0.75 ? 2 : 3;
-    stageItems.forEach((li, idx) => {
-      li.classList.toggle("is-active", idx === active);
-      li.classList.toggle("is-done", idx < active);
-    });
+    const active = stageFromProgress(p);
+    if (about && !about.locked && about.active !== active) about.setActive(active);
     aboutHelix.wake();
   }
 

@@ -1,12 +1,6 @@
-import { Link, NavLink, Outlet } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
+import ServicesMenu from "../components/ServicesMenu";
 import { useAuth } from "../auth/AuthContext";
-
-const nav = [
-  { to: "/livemap", label: "LiveMap" },
-  { to: "/management", label: "Management" },
-  { to: "/medconnect", label: "MedConnect", soon: true },
-  { to: "/education", label: "Education", soon: true },
-];
 
 // Shared chrome for non-map pages: top bar, account actions, footer. LiveMap is full-screen and has its own header.
 export default function SiteLayout() {
@@ -16,13 +10,9 @@ export default function SiteLayout() {
       <header className="border-b border-white/10">
         <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-x-6 gap-y-2 px-4 py-3">
           <a href="/" className="text-sm font-semibold tracking-[0.2em]">DHEDAK</a>
-          <nav aria-label="Primary" className="order-3 -mx-1 flex w-full gap-1 overflow-x-auto text-sm md:order-none md:w-auto">
-            {nav.map((n) => (
-              <NavLink key={n.to} to={n.to}
-                className={({ isActive }) => `whitespace-nowrap rounded-full px-3 py-1.5 ${isActive ? "bg-cyan-400/15 text-cyan-50" : "text-slate-300 hover:text-white"}`}>
-                {n.label}{n.soon && <span className="ml-1.5 text-[10px] uppercase tracking-wider text-amber-200/80">soon</span>}
-              </NavLink>
-            ))}
+          <nav aria-label="Primary" className="order-3 flex w-full items-center gap-1 text-sm md:order-none md:w-auto">
+            <a href="/#about" className="rounded-full px-3 py-1.5 text-slate-300 hover:text-white">About</a>
+            <ServicesMenu />
           </nav>
           <div className="flex items-center gap-2 text-sm">
             {status === "authed" && user ? (

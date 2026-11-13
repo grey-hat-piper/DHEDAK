@@ -4,18 +4,42 @@ export function initEffects({ reduced }) {
   onScroll();
   window.addEventListener("scroll", onScroll, { passive: true });
 
-  // mobile menu
+  // mobile menu (animated by CSS via .is-open; the button morphs into a close icon)
   const btn = document.querySelector("[data-menu-btn]");
   const menu = document.getElementById("menu");
-  btn.addEventListener("click", () => {
-    const open = btn.getAttribute("aria-expanded") === "true";
-    btn.setAttribute("aria-expanded", String(!open));
-    btn.textContent = open ? "Menu" : "Close";
-    menu.classList.toggle("is-open", !open);
+  const dd = document.querySelector("[data-dd]");
+  const ddBtn = dd.querySelector("[data-dd-btn]");
+
+  const setDropdown = (open, { focus = false } = {}) => {
+    ddBtn.setAttribute("aria-expanded", String(open));
+    dd.classList.toggle("is-open", open);
+    if (!open && focus) ddBtn.focus();
+  };
+  const setMenu = (open) => {
+    btn.setAttribute("aria-expanded", String(open));
+    btn.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+    menu.classList.toggle("is-open", open);
+    if (!open) setDropdown(false);
+  };
+  btn.addEventListener("click", () => setMenu(btn.getAttribute("aria-expanded") !== "true"));
+  let hoverOpened = false; // opened by hovering: the click that follows should pin it open, not close it
+  ddBtn.addEventListener("click", () => {
+    if (hoverOpened) { hoverOpened = false; return; }
+    setDropdown(ddBtn.getAttribute("aria-expanded") !== "true");
   });
-  menu.addEventListener("click", (e) => {
-    if (e.target.closest("a")) { btn.setAttribute("aria-expanded", "false"); btn.textContent = "Menu"; menu.classList.remove("is-open"); }
+  // desktop: open on hover too (mouse only), close when the pointer leaves
+  const mouse = window.matchMedia("(hover: hover) and (min-width: 821px)");
+  let leaveTimer = 0;
+  dd.addEventListener("pointerenter", (e) => { if (e.pointerType === "mouse" && mouse.matches) { clearTimeout(leaveTimer); if (!dd.classList.contains("is-open")) hoverOpened = true; setDropdown(true); } });
+  dd.addEventListener("pointerleave", (e) => { if (e.pointerType === "mouse" && mouse.matches) leaveTimer = setTimeout(() => { hoverOpened = false; setDropdown(false); }, 160); });
+  document.addEventListener("pointerdown", (e) => { if (!dd.contains(e.target)) setDropdown(false); });
+  dd.addEventListener("focusout", (e) => { if (!dd.contains(e.relatedTarget)) setDropdown(false); });
+  document.addEventListener("keydown", (e) => {
+    if (e.key !== "Escape") return;
+    if (dd.classList.contains("is-open")) setDropdown(false, { focus: true });
+    else if (menu.classList.contains("is-open")) { setMenu(false); btn.focus(); }
   });
+  menu.addEventListener("click", (e) => { if (e.target.closest("a")) setMenu(false); });
 
   // reveal on scroll (staggered by sibling order); visible immediately under reduced motion
   const items = document.querySelectorAll(".reveal");

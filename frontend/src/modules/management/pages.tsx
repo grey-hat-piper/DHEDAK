@@ -1,4 +1,5 @@
 import { useEffect, useState, type FormEvent } from "react";
+import HelixLoader from "../../components/loader/HelixLoader";
 import { useAuth } from "../../auth/AuthContext";
 import { Badge, EmptyState, Field, inputClass, PageHeader, primaryBtn } from "../../components/ui";
 import { ApiError, getJson, sendJson } from "../../lib/http";
@@ -57,7 +58,7 @@ export function OverviewPage() {
     <>
       <PageHeader title={`Welcome${user?.full_name ? `, ${user.full_name.split(" ")[0]}` : ""}`}
         intro="Your organisation's private workspace for facility data, imports and programmes." />
-      {loading && <p role="status" className="text-slate-400">Loading your organisations…</p>}
+      {loading && <HelixLoader variant="panel" label="Loading your organisations" />}
       {error && <p role="alert" className="mb-4 rounded-lg border border-rose-400/30 bg-rose-950/30 p-3 text-sm text-rose-100">{error} <button className="underline" onClick={reload}>Try again</button></p>}
       {!loading && !error && orgs.length > 0 && (
         <>
@@ -136,7 +137,7 @@ export function TeamPage() {
       <PageHeader title="Team" intro="People with access to this organisation's workspace." />
       {!current && <EmptyState title="No organisation selected">Create or join an organisation first.</EmptyState>}
       {current && error && <p role="alert" className="rounded-lg border border-rose-400/30 bg-rose-950/30 p-3 text-sm text-rose-100">{error}</p>}
-      {current && !error && !members && <p role="status" className="text-slate-400">Loading team…</p>}
+      {current && !error && !members && <HelixLoader variant="panel" label="Loading team" />}
       {members && (
         <ul className="divide-y divide-white/10 rounded-2xl border border-white/10">
           {members.map((m) => (

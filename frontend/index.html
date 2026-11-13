@@ -19,15 +19,27 @@
         <span>DHEDAK</span>
       </a>
       <nav id="menu" class="menu" aria-label="Main">
-        <a href="#about">About DHEDAK</a>
-        <a href="#services">Our Services</a>
-        <a href="/app/livemap">LiveMap</a>
-        <a href="/app/management">Management</a>
-        <a href="#contact">Contact</a>
-        <a href="/app/signin">Sign In</a>
-        <a class="btn btn-solid" href="/app/register">Get Started</a>
+        <a href="#about" style="--i:0">About DHEDAK</a>
+        <div class="dd" data-dd style="--i:1">
+          <button class="dd-btn" type="button" aria-expanded="false" aria-controls="dd-services" data-dd-btn>
+            Our Services
+            <svg class="dd-chev" width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M2 4.5 6 8.5 10 4.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <div class="dd-panel" id="dd-services" data-dd-panel>
+            <ul class="dd-list">
+              <li style="--i:0;--c:#38bdf8"><a href="/app/livemap"><i aria-hidden="true"></i><span><b>LiveMap</b><small>Find verified health facilities</small></span></a></li>
+              <li style="--i:1;--c:#2dd4bf"><a href="/app/management"><i aria-hidden="true"></i><span><b>Management</b><small>Reviewed data and programmes</small></span></a></li>
+              <li style="--i:2;--c:#a78bfa"><a href="/app/medconnect"><i aria-hidden="true"></i><span><b>MedConnect <em>Soon</em></b><small>Providers and suppliers</small></span></a></li>
+              <li style="--i:3;--c:#fbbf24"><a href="/app/education"><i aria-hidden="true"></i><span><b>Education <em>Soon</em></b><small>Health awareness for communities</small></span></a></li>
+            </ul>
+            <a class="dd-all" href="#services">See all services</a>
+          </div>
+        </div>
+        <a href="#contact" style="--i:2">Contact</a>
+        <a href="/app/signin" style="--i:3">Sign In</a>
+        <a class="btn btn-solid" href="/app/register" style="--i:4">Get Started</a>
       </nav>
-      <button class="menu-btn" type="button" aria-expanded="false" aria-controls="menu" data-menu-btn>Menu</button>
+      <button class="menu-btn" type="button" aria-expanded="false" aria-controls="menu" aria-label="Open menu" data-menu-btn><span class="bars" aria-hidden="true"></span></button>
     </div>
   </header>
 
@@ -184,6 +196,59 @@
       <div class="about-track" data-about-track>
         <div class="about-sticky">
           <canvas class="about-helix" data-about-helix aria-hidden="true"></canvas>
+
+          <div class="deck" data-deck role="group" aria-roledescription="carousel" aria-label="The four stages of DHEDAK's approach" tabindex="0">
+            <div class="deck-glass">
+              <div class="deck-slides">
+                <figure class="slide is-active" data-slide>
+                  <svg viewBox="0 0 400 270" aria-hidden="true"><defs><linearGradient id="g1" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#38bdf8"/><stop offset="1" stop-color="#2dd4bf"/></linearGradient></defs>
+                    <g fill="none" stroke="url(#g1)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M200 92v128M200 92C170 72 120 70 80 82v122c40-12 90-10 120 10M200 92c30-20 80-22 120-10v122c-40-12-90-10-120 10"/>
+                      <path d="M104 112c26-4 50-2 72 8M104 136c26-4 50-2 72 8M104 160c26-4 50-2 72 8M296 112c-26-4-50-2-72 8M296 136c-26-4-50-2-72 8M296 160c-26-4-50-2-72 8" stroke-opacity=".55"/>
+                    </g>
+                    <circle cx="200" cy="44" r="22" fill="#38bdf8" fill-opacity=".12" stroke="#38bdf8" stroke-width="2"/><path d="M200 34v20M190 44h20" stroke="#38bdf8" stroke-width="3" stroke-linecap="round"/>
+                    <g stroke="#38bdf8" stroke-opacity=".5" stroke-width="2" stroke-linecap="round"><path d="M158 30l-14-8M242 30l14-8M152 52l-16 2M248 52l16 2"/></g></svg>
+                  <figcaption><span>01</span>Educate</figcaption>
+                </figure>
+                <figure class="slide" data-slide>
+                  <svg viewBox="0 0 400 270" aria-hidden="true">
+                    <g stroke="#8fa3bf" stroke-opacity=".25" stroke-width="1.5"><path d="M40 70h320M40 130h320M40 190h320M90 30v210M170 30v210M250 30v210M330 30v210"/></g>
+                    <path d="M92 196C150 196 130 110 200 120S270 70 316 76" fill="none" stroke="#2dd4bf" stroke-width="3" stroke-dasharray="2 9" stroke-linecap="round"/>
+                    <g><path d="M92 196c-14-18-22-26-22-38a22 22 0 0 1 44 0c0 12-8 20-22 38Z" fill="#38bdf8" fill-opacity=".2" stroke="#38bdf8" stroke-width="2.5"/><circle cx="92" cy="158" r="8" fill="#38bdf8"/></g>
+                    <g><rect x="280" y="40" width="72" height="72" rx="14" fill="#2dd4bf" fill-opacity=".14" stroke="#2dd4bf" stroke-width="2.5"/><path d="M316 58v36M298 76h36" stroke="#2dd4bf" stroke-width="5" stroke-linecap="round"/></g></svg>
+                  <figcaption><span>02</span>Connect</figcaption>
+                </figure>
+                <figure class="slide" data-slide>
+                  <svg viewBox="0 0 400 270" aria-hidden="true">
+                    <g fill="#a78bfa" fill-opacity=".14" stroke="#a78bfa" stroke-width="2.5"><rect x="36" y="86" width="104" height="96" rx="16"/><rect x="260" y="86" width="104" height="96" rx="16"/></g>
+                    <g fill="none" stroke="#a78bfa" stroke-width="2.5" stroke-linecap="round"><path d="M64 118h48M64 138h32M288 118h48M288 138h32"/></g>
+                    <g fill="none" stroke="#38bdf8" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M152 112h96m-14-14 14 14-14 14"/><path d="M248 156h-96m14-14-14 14 14 14" stroke="#2dd4bf"/></g>
+                    <g><path d="M184 190l16-9 16 9v18l-16 9-16-9Z" fill="#fbbf24" fill-opacity=".18" stroke="#fbbf24" stroke-width="2.5" stroke-linejoin="round"/><path d="M184 190l16 9 16-9M200 199v18" stroke="#fbbf24" stroke-width="2" fill="none"/></g></svg>
+                  <figcaption><span>03</span>Resource</figcaption>
+                </figure>
+                <figure class="slide" data-slide>
+                  <svg viewBox="0 0 400 270" aria-hidden="true">
+                    <g stroke="#8fa3bf" stroke-opacity=".25" stroke-width="1.5"><path d="M50 220h310M50 220V40"/><path d="M50 170h310M50 120h310M50 70h310" stroke-opacity=".12"/></g>
+                    <g fill="#2dd4bf" fill-opacity=".22" stroke="#2dd4bf" stroke-width="2"><rect x="82" y="170" width="38" height="50" rx="6"/><rect x="146" y="140" width="38" height="80" rx="6"/><rect x="210" y="106" width="38" height="114" rx="6"/><rect x="274" y="66" width="38" height="154" rx="6"/></g>
+                    <path d="M101 152 165 120 229 88 293 48" fill="none" stroke="#38bdf8" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                    <circle cx="293" cy="48" r="9" fill="#060d1b" stroke="#38bdf8" stroke-width="3"/><path d="M289 48l3 3 6-7" fill="none" stroke="#38bdf8" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  <figcaption><span>04</span>Track &amp; improve</figcaption>
+                </figure>
+              </div>
+              <div class="deck-bar">
+                <button type="button" class="deck-nav" data-deck-prev aria-label="Previous stage"><svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><path d="M9 2 4 7l5 5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+                <div class="deck-dots" role="tablist" aria-label="Choose a stage">
+                  <button type="button" role="tab" data-dot aria-label="Stage 1: Educate" aria-selected="true"></button>
+                  <button type="button" role="tab" data-dot aria-label="Stage 2: Connect" aria-selected="false"></button>
+                  <button type="button" role="tab" data-dot aria-label="Stage 3: Resource" aria-selected="false"></button>
+                  <button type="button" role="tab" data-dot aria-label="Stage 4: Track and improve" aria-selected="false"></button>
+                </div>
+                <button type="button" class="deck-nav" data-deck-next aria-label="Next stage"><svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><path d="m5 2 5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+              </div>
+            </div>
+            <p class="deck-note">Illustrations are conceptual.</p>
+          </div>
+
           <div class="wrap about-grid">
             <div class="about-copy">
               <p class="eyebrow">About DHEDAK</p>
@@ -191,10 +256,10 @@
               <p class="muted">Health information creates impact when people can understand it, find the right service and access support. DHEDAK aims to close that gap across Ghana, Cameroon and Uganda, with an architecture ready for more African countries.</p>
             </div>
             <ol class="stages">
-              <li data-stage-item class="is-active"><span>01</span><div><h3>Educate</h3><p>Make reliable health information easier to understand.</p></div></li>
-              <li data-stage-item><span>02</span><div><h3>Connect</h3><p>Help people find verified healthcare services.</p></div></li>
-              <li data-stage-item><span>03</span><div><h3>Resource</h3><p>Strengthen links between providers and suppliers.</p></div></li>
-              <li data-stage-item><span>04</span><div><h3>Track &amp; improve</h3><p>Organise data, monitor programmes and learn from results.</p></div></li>
+              <li data-stage-item class="is-active"><button type="button" data-stage-btn aria-label="Show stage 1: Educate"><span>01</span><span class="st-body"><span class="st-title">Educate</span><span class="st-desc">Make reliable health information easier to understand.</span></span></button></li>
+              <li data-stage-item><button type="button" data-stage-btn aria-label="Show stage 2: Connect"><span>02</span><span class="st-body"><span class="st-title">Connect</span><span class="st-desc">Help people find verified healthcare services.</span></span></button></li>
+              <li data-stage-item><button type="button" data-stage-btn aria-label="Show stage 3: Resource"><span>03</span><span class="st-body"><span class="st-title">Resource</span><span class="st-desc">Strengthen links between providers and suppliers.</span></span></button></li>
+              <li data-stage-item><button type="button" data-stage-btn aria-label="Show stage 4: Track and improve"><span>04</span><span class="st-body"><span class="st-title">Track &amp; improve</span><span class="st-desc">Organise data, monitor programmes and learn from results.</span></span></button></li>
             </ol>
           </div>
         </div>
