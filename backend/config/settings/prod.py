@@ -13,6 +13,12 @@ for _var in ("VERCEL_URL", "VERCEL_BRANCH_URL", "VERCEL_PROJECT_PRODUCTION_URL")
         ALLOWED_HOSTS.append(_host)  # noqa: F405
         CSRF_TRUSTED_ORIGINS.append(f"https://{_host}")  # noqa: F405
 
+# On Vercel the edge routes by hostname before Django sees the request, so trusting *.vercel.app
+# (production alias, preview URLs, and the host Django sees behind the Services proxy) is safe.
+if os.environ.get("VERCEL"):
+    ALLOWED_HOSTS.append(".vercel.app")  # noqa: F405
+    CSRF_TRUSTED_ORIGINS.append("https://*.vercel.app")  # noqa: F405
+
 if not SECRET_KEY:  # noqa: F405
     raise ImproperlyConfigured("DJANGO_SECRET_KEY must be set in production.")
 if not ALLOWED_HOSTS:  # noqa: F405
